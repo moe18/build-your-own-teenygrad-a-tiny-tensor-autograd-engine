@@ -23,7 +23,7 @@ python scaffold.py
 - [ ] **11.** lazybuffer_expand
 - [ ] **12.** lazybuffer_permute
 - [x] **13.** Function
-- [ ] **14.** function_forward_backward_stubs
+- [x] **14.** function_forward_backward_stubs
 - [x] **15.** apply
 - [ ] **16.** Neg
 - [ ] **17.** Relu
