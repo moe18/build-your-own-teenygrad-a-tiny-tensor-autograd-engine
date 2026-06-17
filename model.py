@@ -75,27 +75,20 @@ def function_forward_backward_stubs():
 # Step 15 - apply
 @classmethod
 def apply(cls, *tensors, **kwargs):
-    # Create the operation context
     ctx = cls(*tensors)
-
-    # Run forward using the raw tensor buffers
-    out = ctx.forward(*[t.data for t in tensors], **kwargs)
-
-    # Output requires grad if any input requires grad
-    requires_grad = any(t.requires_grad for t in tensors)
-
-    # Wrap result back into a Tensor
-    result = Tensor(out, requires_grad=requires_grad)
-
-    # Link output tensor back to this operation for backward
-    if requires_grad:
-        result._ctx = ctx
-
-    return result
+    out_buf = ctx.forward(*[t.lazydata for t in tensors], **kwargs)
+    out = Tensor(out_buf, requires_grad=ctx.requires_grad)
+    if ctx.requires_grad:
+        out._ctx = ctx
+    return out
 
 
-# Attach apply onto Function so subclasses inherit it
-Function.apply = apply
+# Provided: attaches apply onto the Function base class. Leave this as-is.
+for _obj in list(globals().values()):
+    if isinstance(_obj, type):
+        for _k in _obj.__mro__:
+            if _k.__name__ == 'Function':
+                _k.apply = apply
 
 # Step 16 - Neg (not yet solved)
 # TODO: implement
@@ -115,8 +108,15 @@ Function.apply = apply
 # Step 21 - Sigmoid (not yet solved)
 # TODO: implement
 
-# Step 22 - Add (not yet solved)
-# TODO: implement
+# Step 22 - Add
+class Add(Function):
+    def forward(self, x, y):
+        _, BinaryOps, _, _ = make_op_enums()
+        return lazybuffer_binary_e(x, BinaryOps.ADD, y)
+
+    def backward(self, grad_output):
+        return (grad_output if self.needs_input_grad[0] else None,
+                grad_output if self.needs_input_grad[1] else None)
 
 # Step 23 - Sub (not yet solved)
 # TODO: implement
