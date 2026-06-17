@@ -13,8 +13,9 @@ def prod(shape):
         result *= dim
     return result
 
-# Step 2 - argsort (not yet solved)
-# TODO: implement
+# Step 2 - argsort
+def argsort(values):
+    return sorted(range(len(values)), key=lambda i: values[i])
 
 # Step 3 - make_op_enums (not yet solved)
 # TODO: implement
