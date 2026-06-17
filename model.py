@@ -20,8 +20,26 @@ def argsort(values):
 # Step 3 - make_op_enums (not yet solved)
 # TODO: implement
 
-# Step 4 - LazyBuffer (not yet solved)
-# TODO: implement
+# Step 4 - LazyBuffer
+import numpy as np
+
+class LazyBuffer:
+    def __init__(self, np_array):
+        self._np = np.asarray(np_array)
+        self.shape = tuple(int(d) for d in self._np.shape)
+        self.dtype = self._np.dtype
+
+    def __array__(self, dtype=None):
+        return np.asarray(self._np, dtype=dtype)
+
+    def __float__(self):
+        return float(self._np)
+
+    def __repr__(self):
+        return repr(self._np)
+
+    def __str__(self):
+        return str(self._np)
 
 # Step 5 - lazybuffer_const (not yet solved)
 # TODO: implement
