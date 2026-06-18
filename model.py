@@ -7,39 +7,40 @@ Assembled from your step-by-step solutions.
 import numpy as np
 
 # Step 1 - prod
+import numpy as np
 def prod(shape):
-    result = 1
-    for dim in shape:
-        result *= dim
-    return result
+    # TODO: Multiply together the elements of a shape tuple to get the total number of elements.
+    val = 1
+    for i in shape:
+        val *=i
+
+    return val
 
 # Step 2 - argsort
+import numpy 
 def argsort(values):
-    return sorted(range(len(values)), key=lambda i: values[i])
+    # TODO: Return the indices that would sort values in ascending order.
+    return np.argsort(values).tolist()
 
-# Step 3 - make_op_enums (not yet solved)
-# TODO: implement
+# Step 3 - make_op_enums
+import enum
+def make_op_enums():
+    # TODO: create four enum classes naming every supported operation kind
+    UnaryOps = enum.Enum('UnaryOps',['NEG', 'RELU', 'LOG', 'EXP', 'SQRT', 'SIGMOID'])
+    BinaryOps = enum.Enum('BinaryOps',[ 'ADD', 'SUB', 'MUL', 'DIV', 'CMPLT', 'MAX'])
+    ReduceOps = enum.Enum('ReduceOps',['SUM','MAX'])
+    MovementOps = enum.Enum('MovementOps',['RESHAPE', 'EXPAND', 'PERMUTE'])
+
+
+    return UnaryOps,BinaryOps,ReduceOps,MovementOps
 
 # Step 4 - LazyBuffer
-import numpy as np
-
 class LazyBuffer:
     def __init__(self, np_array):
+        # TODO: wrap np_array as an ndarray and expose shape and dtype
         self._np = np.asarray(np_array)
-        self.shape = tuple(int(d) for d in self._np.shape)
+        self.shape = self._np.shape
         self.dtype = self._np.dtype
-
-    def __array__(self, dtype=None):
-        return np.asarray(self._np, dtype=dtype)
-
-    def __float__(self):
-        return float(self._np)
-
-    def __repr__(self):
-        return repr(self._np)
-
-    def __str__(self):
-        return str(self._np)
 
 # Step 5 - lazybuffer_const (not yet solved)
 # TODO: implement
@@ -65,48 +66,23 @@ class LazyBuffer:
 # Step 12 - lazybuffer_permute (not yet solved)
 # TODO: implement
 
-# Step 13 - Function
-class Function:
-    def __init__(self, *tensors):
-        self.needs_input_grad = [t.requires_grad for t in tensors]
-        if any(self.needs_input_grad):
-            self.requires_grad = True
-        elif None in self.needs_input_grad:
-            self.requires_grad = None
-        else:
-            self.requires_grad = False
-        if self.requires_grad:
-            self.parents = tensors
+# Step 13 - Function (not yet solved)
+# TODO: implement
 
-# Step 14 - function_forward_backward_stubs
-def function_forward_backward_stubs():
-    def forward(self, *args, **kwargs):
-        raise NotImplementedError(f"forward not implemented for {type(self).__name__}")
-
-    def backward(self, *args, **kwargs):
-        raise NotImplementedError(f"backward not implemented for {type(self).__name__}")
-
-    Function.forward = forward
-    Function.backward = backward
-    return Function
+# Step 14 - function_forward_backward_stubs (not yet solved)
+# TODO: implement
 
 # Step 15 - apply
 @classmethod
-def apply(cls, *tensors, **kwargs):
-    ctx = cls(*tensors)
-    out_buf = ctx.forward(*[t.lazydata for t in tensors], **kwargs)
-    out = Tensor(out_buf, requires_grad=ctx.requires_grad)
+def apply(cls, tensors, **kwargs):
+    # TODO: instantiate the Function, run forward on input buffers, return a linked Tensor
+    ctx = cls(tensors)
+    outbuf = ctx.forward(*[t.lazydata for t in tensors], **kwargs)
+    out = Tensor(outbuf, requires_grad=ctx.requires_grad)
     if ctx.requires_grad:
         out._ctx = ctx
     return out
-
-
-# Provided: attaches apply onto the Function base class. Leave this as-is.
-for _obj in list(globals().values()):
-    if isinstance(_obj, type):
-        for _k in _obj.__mro__:
-            if _k.__name__ == 'Function':
-                _k.apply = apply
+Function.apply = apply
 
 # Step 16 - Neg (not yet solved)
 # TODO: implement
@@ -126,15 +102,8 @@ for _obj in list(globals().values()):
 # Step 21 - Sigmoid (not yet solved)
 # TODO: implement
 
-# Step 22 - Add
-class Add(Function):
-    def forward(self, x, y):
-        _, BinaryOps, _, _ = make_op_enums()
-        return lazybuffer_binary_e(x, BinaryOps.ADD, y)
-
-    def backward(self, grad_output):
-        return (grad_output if self.needs_input_grad[0] else None,
-                grad_output if self.needs_input_grad[1] else None)
+# Step 22 - Add (not yet solved)
+# TODO: implement
 
 # Step 23 - Sub (not yet solved)
 # TODO: implement

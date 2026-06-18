@@ -12,7 +12,7 @@ python scaffold.py
 
 - [x] **1.** prod
 - [x] **2.** argsort
-- [ ] **3.** make_op_enums
+- [x] **3.** make_op_enums
 - [x] **4.** LazyBuffer
 - [ ] **5.** lazybuffer_const
 - [ ] **6.** rand
@@ -22,8 +22,8 @@ python scaffold.py
 - [ ] **10.** lazybuffer_reshape
 - [ ] **11.** lazybuffer_expand
 - [ ] **12.** lazybuffer_permute
-- [x] **13.** Function
-- [x] **14.** function_forward_backward_stubs
+- [ ] **13.** Function
+- [ ] **14.** function_forward_backward_stubs
 - [x] **15.** apply
 - [ ] **16.** Neg
 - [ ] **17.** Relu
@@ -31,7 +31,7 @@ python scaffold.py
 - [ ] **19.** Exp
 - [ ] **20.** Sqrt
 - [ ] **21.** Sigmoid
-- [x] **22.** Add
+- [ ] **22.** Add
 - [ ] **23.** Sub
 - [ ] **24.** Mul
 - [ ] **25.** Div
