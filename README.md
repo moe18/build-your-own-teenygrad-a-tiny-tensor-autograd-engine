@@ -14,24 +14,24 @@ python scaffold.py
 - [x] **2.** argsort
 - [x] **3.** make_op_enums
 - [x] **4.** LazyBuffer
-- [x] **5.** lazybuffer_const
+- [ ] **5.** lazybuffer_const
 - [ ] **6.** rand
 - [ ] **7.** lazybuffer_unary_e
-- [ ] **8.** lazybuffer_binary_e
+- [x] **8.** lazybuffer_binary_e
 - [ ] **9.** lazybuffer_r
 - [ ] **10.** lazybuffer_reshape
 - [ ] **11.** lazybuffer_expand
 - [ ] **12.** lazybuffer_permute
-- [ ] **13.** Function
-- [ ] **14.** function_forward_backward_stubs
+- [x] **13.** Function
+- [x] **14.** function_forward_backward_stubs
 - [x] **15.** apply
-- [ ] **16.** Neg
-- [ ] **17.** Relu
+- [x] **16.** Neg
+- [x] **17.** Relu
 - [ ] **18.** Log
 - [ ] **19.** Exp
 - [ ] **20.** Sqrt
 - [ ] **21.** Sigmoid
-- [ ] **22.** Add
+- [x] **22.** Add
 - [ ] **23.** Sub
 - [ ] **24.** Mul
 - [ ] **25.** Div
@@ -43,7 +43,7 @@ python scaffold.py
 - [ ] **31.** expand_function_forward
 - [ ] **32.** expand_function_backward
 - [ ] **33.** permute_function_forward_backward
-- [ ] **34.** Tensor
+- [x] **34.** Tensor
 - [ ] **35.** tensor_from_data
 - [ ] **36.** tensor_creation_helpers
 - [ ] **37.** tensor_randn
