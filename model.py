@@ -49,8 +49,10 @@ class LazyBuffer:
     def __str__(self):
         return str(self._np)
 
-# Step 5 - lazybuffer_const (not yet solved)
-# TODO: implement
+# Step 5 - lazybuffer_const
+def const(value, shape):
+    return LazyBuffer(np.full(shape, value, dtype=np.float32))
+LazyBuffer.const = staticmethod(const)
 
 # Step 6 - rand (not yet solved)
 # TODO: implement
